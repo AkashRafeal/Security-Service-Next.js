@@ -53,14 +53,14 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <div className="space-y-10 sm:space-y-14 pb-16">
+    <div className="space-y-4 sm:space-y-10 pb-16">
       {/* 1. Hero Section with Call to Actions & Metrics */}
       <Hero />
 
       {/* 4. Why Choose Us: Corporate Value Pillars */}
-      <section className="bg-white py-10 sm:py-12">
+      <section className="bg-white py-4 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-8">
             <span className="text-xs font-bold text-gold-400 uppercase tracking-widest block mb-2">
               The ABC Security Standard
             </span>

@@ -140,7 +140,7 @@ export const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Right Controls: Compact Quote CTA + Login Icon + Hamburger Toggle */}
+        {/* Mobile Right Controls: Compact Quote CTA + Hamburger Toggle */}
         <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Quick Compact Quote CTA */}
           <Link
@@ -150,29 +150,31 @@ export const Navbar = () => {
             Get a Quote
           </Link>
 
-          {/* Quick Login / Profile Gateway */}
-          {user ? (
-            <Link
-              href={isAdmin || isStaff ? '/admin/dashboard' : '/portal'}
-              className="p-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100 transition-colors flex items-center justify-center"
-              title={isAdmin ? 'Admin Console' : 'Client Portal'}
-            >
-              <User className="w-4 h-4 text-amber-700" />
-            </Link>
-          ) : (
-            <Link
-              href="/login"
-              className="p-1.5 rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors flex items-center justify-center"
-              title="Sign In"
-            >
-              <User className="w-4 h-4 text-slate-700" />
-            </Link>
-          )}
+          {/* Quick Login / Profile Gateway - visible on sm+ screens */}
+          <div className="hidden sm:flex items-center">
+            {user ? (
+              <Link
+                href={isAdmin || isStaff ? '/admin/dashboard' : '/portal'}
+                className="p-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100 transition-colors flex items-center justify-center"
+                title={isAdmin ? 'Admin Console' : 'Client Portal'}
+              >
+                <User className="w-4 h-4 text-amber-700" />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="p-1.5 rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors flex items-center justify-center"
+                title="Sign In"
+              >
+                <User className="w-4 h-4 text-slate-700" />
+              </Link>
+            )}
+          </div>
 
-          {/* Mobile Hamburger Toggle Button - ALWAYS visible and accessible */}
+          {/* Mobile Hamburger Toggle Button - ALWAYS visible with safe margin */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1.5 sm:p-2 rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border border-slate-200 transition-colors flex items-center justify-center shadow-xs"
+            className="p-1.5 sm:p-2 rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border border-slate-200 transition-colors flex items-center justify-center shadow-xs shrink-0"
             aria-label="Toggle Navigation Directory"
             aria-expanded={isOpen}
           >

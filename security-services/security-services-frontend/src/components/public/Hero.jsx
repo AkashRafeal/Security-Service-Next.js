@@ -73,10 +73,10 @@ const TACTICAL_DIVISIONS = [
 export const Hero = () => {
 
   return (
-    <section className="relative overflow-hidden bg-white pt-4 sm:pt-5 lg:pt-6 pb-6 sm:pb-8">
+    <section className="relative overflow-hidden bg-white pt-3 sm:pt-5 lg:pt-6 pb-2 sm:pb-6">
 
       <div className="relative z-10 max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 items-center">
           {/* Left Column: Mission, Headline & Conversion Controls */}
           <div className="lg:col-span-5 space-y-5 text-left">
             {/* Certification & Trust Badge */}
@@ -149,7 +149,7 @@ export const Hero = () => {
           {/* Right Column: React Bits Showcase */}
           <div className="lg:col-span-7 w-full flex flex-col justify-center items-center">
             {/* ScrollStack View Container - responsive rectangular showcase */}
-            <div className="relative w-full h-[395px] sm:h-[450px] lg:h-[465px] flex items-start justify-center bg-transparent px-0 sm:px-1">
+            <div className="relative w-full h-[375px] sm:h-[435px] lg:h-[455px] flex items-start justify-center bg-transparent px-0 sm:px-1">
               <ScrollStack
                 autoPlay={true}
                 autoPlayInterval={5000}
@@ -159,7 +159,7 @@ export const Hero = () => {
                 {TACTICAL_DIVISIONS.map((item) => (
                   <ScrollStackItem
                     key={item.id}
-                    className={`relative w-full h-[355px] sm:h-[405px] lg:h-[420px] overflow-hidden rounded-2xl border ${item.borderClass} bg-white shadow-xl p-2.5 sm:p-4 flex flex-col justify-end group`}
+                    className={`relative w-full h-full overflow-hidden rounded-2xl border ${item.borderClass} bg-white shadow-xl p-2 sm:p-4 flex flex-col justify-end group`}
                   >
                     {/* Background Photo */}
                     <div
@@ -168,8 +168,8 @@ export const Hero = () => {
                     />
 
                     {/* Floating Bottom Card - Translucent frosted glass effect */}
-                    <div className="relative z-10 w-full bg-white/85 sm:bg-white/75 backdrop-blur-md rounded-xl p-2.5 sm:p-3.5 border border-white/60 shadow-lg">
-                      <div className="space-y-0.5 pb-1 sm:pb-2">
+                    <div className="relative z-10 w-full bg-white/90 sm:bg-white/80 backdrop-blur-md rounded-xl p-2 sm:p-3.5 border border-white/70 shadow-lg">
+                      <div className="space-y-0.5 pb-1 sm:pb-1.5">
                         <h3
                           className="text-xs sm:text-base font-bold text-[#0F172A] transition-colors tracking-tight truncate"
                           style={{ color: '#0F172A' }}
@@ -177,19 +177,19 @@ export const Hero = () => {
                           {item.title}
                         </h3>
                         <p
-                          className="text-[11px] sm:text-xs text-[#334155] leading-relaxed max-w-lg font-medium line-clamp-2"
+                          className="text-[10.5px] sm:text-xs text-[#334155] leading-snug font-medium line-clamp-1 sm:line-clamp-2"
                           style={{ color: '#334155' }}
                         >
                           {item.desc}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between gap-1.5 pt-1">
+                      <div className="flex items-center justify-between gap-1.5 pt-1 border-t border-slate-100 sm:border-transparent">
                         <div className="flex flex-wrap items-center gap-1 min-w-0">
                           {item.tags.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9.5px] sm:text-[10.5px] font-semibold whitespace-nowrap border border-slate-200/70 bg-white/75 text-[#334155] ${tIdx > 1 ? 'hidden min-[420px]:inline-block' : 'inline-block'}`}
+                              className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9px] sm:text-[10.5px] font-semibold whitespace-nowrap border border-slate-200/70 bg-white/80 text-[#334155] ${tIdx > 1 ? 'hidden min-[420px]:inline-block' : 'inline-block'}`}
                             >
                               {tag}
                             </span>
@@ -200,10 +200,10 @@ export const Hero = () => {
                         <div className="flex items-center gap-1 shrink-0 ml-auto">
                           <Link
                             href={item.link}
-                            className={`inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold transition-colors px-2.5 py-1 rounded-lg border shrink-0 whitespace-nowrap shadow-xs ${item.accentClass || 'text-amber-700 bg-amber-50 border-amber-300'}`}
+                            className={`inline-flex items-center gap-1 text-[10.5px] sm:text-xs font-bold transition-colors px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg border shrink-0 whitespace-nowrap shadow-xs ${item.accentClass || 'text-amber-700 bg-amber-50 border-amber-300'}`}
                           >
                             <span>Explore</span>
-                            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                            <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
                           </Link>
                         </div>
                       </div>
