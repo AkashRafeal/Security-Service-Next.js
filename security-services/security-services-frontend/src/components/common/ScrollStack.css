@@ -1,0 +1,26 @@
+.scroll-stack-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  user-select: none;
+}
+
+/* Outer card wrapper: zero padding, transparent, no blur, no shadow */
+.scroll-stack-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transform-origin: top center;
+  will-change: transform, opacity;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

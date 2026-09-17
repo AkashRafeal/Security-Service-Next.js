@@ -1,0 +1,300 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  /* Hide scrollbars completely across the entire site for all elements */
+  *, *::before, *::after {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  ::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+}
+
+/* Light Theme Typography: Map text-white across the site to crisp dark slate for headings & labels */
+.text-white {
+  color: #0F172A;
+}
+
+/* All headings default to crisp high-contrast midnight slate */
+h1, h2, h3, h4, h5, h6 {
+  color: #0F172A;
+}
+
+.hero-main-title {
+  color: #0F172A !important;
+}
+
+/* Light Theme Body Typography: Remap faint light-slate text classes to crisp, readable dark slate */
+.text-slate-200,
+.text-slate-300,
+.text-slate-400,
+.text-gray-200,
+.text-gray-300,
+.text-gray-400 {
+  color: #334155 !important;
+}
+
+.text-slate-500,
+.text-gray-500 {
+  color: #475569 !important;
+}
+
+.text-slate-600,
+.text-gray-600 {
+  color: #334155 !important;
+}
+
+.text-slate-700,
+.text-gray-700 {
+  color: #1E293B !important;
+}
+
+.text-slate-800,
+.text-slate-900,
+.text-gray-800,
+.text-gray-900 {
+  color: #0F172A !important;
+}
+
+/* Light Theme Card Borders: soften dark border classes from legacy dark theme */
+.border-slate-800,
+.border-slate-700 {
+  border-color: #E2E8F0 !important;
+}
+
+/* Hide all layout dividing lines and background grid patterns */
+.bg-grid-pattern {
+  display: none !important;
+  background-image: none !important;
+}
+
+header,
+nav {
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important;
+}
+
+/* Light Theme Backgrounds: Ensure all slate and gray backgrounds are strictly light */
+.bg-slate-50,
+.bg-gray-50 {
+  background-color: #F8FAFC !important;
+}
+
+.bg-slate-100,
+.bg-gray-100 {
+  background-color: #F1F5F9 !important;
+}
+
+.bg-slate-200,
+.bg-gray-200 {
+  background-color: #E2E8F0 !important;
+}
+
+/* Universal Light Theme Hover States */
+.hover\:bg-slate-50:hover,
+.hover\:bg-gray-50:hover {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.hover\:bg-slate-100:hover,
+.hover\:bg-gray-100:hover {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+.hover\:bg-slate-200:hover,
+.hover\:bg-gray-200:hover {
+  background-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+.hover\:bg-slate-800:hover,
+.hover\:bg-slate-900:hover,
+.hover\:bg-navy-800:hover,
+.hover\:bg-navy-900:hover {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+}
+
+/* Secondary Button Light Theme Styling & Hover */
+.btn-secondary {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Specific elements that MUST keep pure white text on colored/dark badges and buttons */
+.btn-primary,
+.btn-primary *,
+.bg-rose-600,
+.bg-rose-600 *,
+.bg-rose-500,
+.bg-rose-500 *,
+.bg-blue-600,
+.bg-blue-600 *,
+.bg-blue-700,
+.bg-blue-700 *,
+.bg-emerald-600,
+.bg-emerald-600 *,
+[class*="bg-rose-"] .text-white,
+[class*="bg-blue-"] .text-white,
+[class*="bg-emerald-"] .text-white,
+.force-white-text,
+.force-white-text * {
+  color: #FFFFFF !important;
+}
+
+/* Dark high-contrast icons & text on gold badges, buttons, and icons */
+.text-navy-950,
+.fill-navy-950 {
+  color: #0F172A !important;
+  fill: #0F172A !important;
+}
+
+/* Universal Light Theme Glassmorphism Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.05);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Subtle light corporate grid pattern */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+/* Universal Light Theme for Dropdown Elements */
+select {
+  color-scheme: light;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+select option,
+select optgroup {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  padding: 10px 14px;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #D97706 !important;
+  color: #FFFFFF !important;
+}
+
+/* Global Form & Button Utilities */
+input, textarea {
+  background-color: #FFFFFF;
+  color: #0F172A;
+}
+input::placeholder, textarea::placeholder {
+  color: #94A3B8;
+}
+
+.input-field {
+  width: 100%;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  border: 1px solid #CBD5E1;
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.input-field:hover {
+  border-color: #94A3B8;
+}
+.input-field:focus {
+  border-color: #D97706;
+  box-shadow: 0 0 0 1px rgba(217, 119, 6, 0.4);
+}
+.input-field::placeholder {
+  color: #94A3B8;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #0F172A !important;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  box-shadow: 0 4px 14px 0 rgba(217, 119, 6, 0.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+}
+
+/* Subtle light hovers */
+.hover\:bg-white\/5:hover,
+.hover\:bg-white\/10:hover {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Card Hover Micro-Interactions */
+.card-hover-effect {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease !important;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 38px -6px rgba(15, 23, 42, 0.09), 0 8px 16px -4px rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(217, 119, 6, 0.45) !important;
+}
+
+.card-hover-effect input,
+.card-hover-effect textarea,
+.card-hover-effect select {
+  cursor: text;
+}
+
