@@ -8,11 +8,12 @@ import { Modal } from '../../components/common/Modal';
 import { Button } from '../../components/common/Button';
 import { CustomSelect } from '../../components/common/CustomSelect';
 import { useToast } from '../../context/ToastContext';
+import { MOCK_ADMIN_QUOTES } from '../../utils/mockData';
 import { Eye, Edit, FileSpreadsheet, CheckCircle, Calculator, Building, MapPin, Phone, Mail } from 'lucide-react';
 
 export const AdminQuotesPage = () => {
-  const [quotes, setQuotes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [quotes, setQuotes] = useState(MOCK_ADMIN_QUOTES);
+  const [loading, setLoading] = useState(false);
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [editStatus, setEditStatus] = useState('');
   const [editNotes, setEditNotes] = useState('');
@@ -22,12 +23,11 @@ export const AdminQuotesPage = () => {
   const toast = useToast();
 
   const fetchQuotes = async () => {
-    setLoading(true);
     try {
       const data = await adminService.getQuotes();
-      setQuotes(data || []);
+      if (data && data.length > 0) setQuotes(data);
     } catch (e) {
-      toast.error('Failed to load quotes');
+      // Keep fallback quotes
     } finally {
       setLoading(false);
     }

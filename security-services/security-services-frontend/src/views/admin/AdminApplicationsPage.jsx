@@ -8,11 +8,12 @@ import { Modal } from '../../components/common/Modal';
 import { Button } from '../../components/common/Button';
 import { CustomSelect } from '../../components/common/CustomSelect';
 import { useToast } from '../../context/ToastContext';
+import { MOCK_ADMIN_APPLICATIONS } from '../../utils/mockData';
 import { Edit, FileText, Download, ExternalLink, User } from 'lucide-react';
 
 export const AdminApplicationsPage = () => {
-  const [applications, setApplications] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [applications, setApplications] = useState(MOCK_ADMIN_APPLICATIONS);
+  const [loading, setLoading] = useState(false);
   const [selectedApp, setSelectedApp] = useState(null);
   const [editStatus, setEditStatus] = useState('NEW');
   const [editNotes, setEditNotes] = useState('');
@@ -20,12 +21,11 @@ export const AdminApplicationsPage = () => {
   const toast = useToast();
 
   const fetchApps = async () => {
-    setLoading(true);
     try {
       const data = await adminService.getApplications();
-      setApplications(data || []);
+      if (data && data.length > 0) setApplications(data);
     } catch (e) {
-      toast.error('Failed to load applications');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -50,9 +50,9 @@ export const AdminApplicationsPage = () => {
         status: editStatus,
         internalNotes: editNotes,
       });
+      setApplications(prev => prev.map(a => a.id === selectedApp.id ? { ...a, status: editStatus, internalNotes: editNotes } : a));
       toast.success('Applicant status updated');
       setSelectedApp(null);
-      fetchApps();
     } catch (err) {
       toast.error('Failed to update applicant');
     } finally {

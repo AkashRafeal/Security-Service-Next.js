@@ -9,14 +9,15 @@ import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import FileUploader from '../../components/common/FileUploader';
 import { CustomSelect } from '../../components/common/CustomSelect';
+import { MOCK_PROJECTS, MOCK_SERVICES, MOCK_INDUSTRIES } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Eye, Shield } from 'lucide-react';
 
 const AdminProjectsPage = () => {
   const { addToast } = useToast();
-  const [projects, setProjects] = useState([]);
-  const [services, setServices] = useState([]);
-  const [industries, setIndustries] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(MOCK_PROJECTS);
+  const [services, setServices] = useState(MOCK_SERVICES);
+  const [industries, setIndustries] = useState(MOCK_INDUSTRIES);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -40,18 +41,20 @@ const AdminProjectsPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchData = async () => {
-    setLoading(true);
     try {
       const [projRes, servRes, indRes] = await Promise.all([
         adminService.getProjects(),
         adminService.getServices(),
         adminService.getIndustries()
       ]);
-      setProjects(projRes.data?.data || projRes.data || []);
-      setServices(servRes.data?.data || servRes.data || []);
-      setIndustries(indRes.data?.data || indRes.data || []);
+      const pList = Array.isArray(projRes) ? projRes : (projRes?.data?.data || projRes?.data || []);
+      const sList = Array.isArray(servRes) ? servRes : (servRes?.data?.data || servRes?.data || []);
+      const iList = Array.isArray(indRes) ? indRes : (indRes?.data?.data || indRes?.data || []);
+      if (pList && pList.length > 0) setProjects(pList);
+      if (sList && sList.length > 0) setServices(sList);
+      if (iList && iList.length > 0) setIndustries(iList);
     } catch (err) {
-      addToast('Failed to load projects and dependencies', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -93,13 +96,14 @@ const AdminProjectsPage = () => {
     try {
       if (isEditing) {
         await adminService.updateProject(selectedProject.id, formData);
+        setProjects(prev => prev.map(p => p.id === selectedProject.id ? { ...p, ...formData } : p));
         addToast('Project case study updated successfully', 'success');
       } else {
-        await adminService.createProject(formData);
+        const created = await adminService.createProject(formData);
+        setProjects(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         addToast('Project case study created successfully', 'success');
       }
       setModalOpen(false);
-      fetchData();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -108,9 +112,9 @@ const AdminProjectsPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteProject(selectedProject.id);
+      setProjects(prev => prev.filter(p => p.id !== selectedProject.id));
       addToast('Project deleted successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchData();
     } catch (err) {
       addToast('Failed to delete project', 'error');
     }

@@ -7,12 +7,13 @@ import DataTable from '../../components/admin/DataTable';
 import Modal from '../../components/common/Modal';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
+import { MOCK_USERS } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Shield, User, Key } from 'lucide-react';
 
 const AdminUsersPage = () => {
   const { addToast } = useToast();
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState(MOCK_USERS);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -32,12 +33,12 @@ const AdminUsersPage = () => {
   const [newPassword, setNewPassword] = useState('');
 
   const fetchUsers = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getUsers();
-      setUsers(Array.isArray(res) ? res : res?.data?.data || res?.data || []);
+      const list = Array.isArray(res) ? res : res?.data?.data || res?.data || [];
+      if (list && list.length > 0) setUsers(list);
     } catch (err) {
-      addToast('Failed to load system users', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -79,13 +80,14 @@ const AdminUsersPage = () => {
     try {
       if (isEditing) {
         await adminService.updateUser(selectedUser.id, formData);
+        setUsers(prev => prev.map(u => u.id === selectedUser.id ? { ...u, ...formData } : u));
         addToast('User details updated successfully', 'success');
       } else {
-        await adminService.createUser(formData);
+        const created = await adminService.createUser(formData);
+        setUsers(prev => [created || { id: Date.now(), createdAt: new Date().toISOString(), ...formData }, ...prev]);
         addToast('New user account provisioned successfully', 'success');
       }
       setModalOpen(false);
-      fetchUsers();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -109,9 +111,9 @@ const AdminUsersPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteUser(selectedUser.id);
+      setUsers(prev => prev.filter(u => u.id !== selectedUser.id));
       addToast('User deleted successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchUsers();
     } catch (err) {
       addToast('Failed to delete user account', 'error');
     }

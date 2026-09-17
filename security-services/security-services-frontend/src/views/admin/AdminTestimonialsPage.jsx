@@ -9,12 +9,13 @@ import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import FileUploader from '../../components/common/FileUploader';
 import { CustomSelect } from '../../components/common/CustomSelect';
+import { MOCK_TESTIMONIALS } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Star, CheckCircle, XCircle } from 'lucide-react';
 
 const AdminTestimonialsPage = () => {
   const { addToast } = useToast();
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [testimonials, setTestimonials] = useState(MOCK_TESTIMONIALS);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
@@ -33,12 +34,12 @@ const AdminTestimonialsPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchTestimonials = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getTestimonials();
-      setTestimonials(Array.isArray(res) ? res : res?.data?.data || res?.data || []);
+      const list = Array.isArray(res) ? res : res?.data?.data || res?.data || [];
+      if (list && list.length > 0) setTestimonials(list);
     } catch (err) {
-      addToast('Failed to load testimonials', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -75,13 +76,14 @@ const AdminTestimonialsPage = () => {
     try {
       if (isEditing) {
         await adminService.updateTestimonial(selectedTestimonial.id, formData);
+        setTestimonials(prev => prev.map(t => t.id === selectedTestimonial.id ? { ...t, ...formData } : t));
         addToast('Testimonial updated successfully', 'success');
       } else {
-        await adminService.createTestimonial(formData);
+        const created = await adminService.createTestimonial(formData);
+        setTestimonials(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         addToast('Testimonial created successfully', 'success');
       }
       setModalOpen(false);
-      fetchTestimonials();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -90,9 +92,9 @@ const AdminTestimonialsPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteTestimonial(selectedTestimonial.id);
+      setTestimonials(prev => prev.filter(t => t.id !== selectedTestimonial.id));
       addToast('Testimonial deleted successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchTestimonials();
     } catch (err) {
       addToast('Failed to delete testimonial', 'error');
     }

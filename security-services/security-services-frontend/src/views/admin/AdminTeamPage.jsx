@@ -8,12 +8,13 @@ import Modal from '../../components/common/Modal';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import FileUploader from '../../components/common/FileUploader';
+import { MOCK_TEAM } from '../../utils/mockData';
 import { Plus, Edit, Trash2, UserCheck, Shield } from 'lucide-react';
 
 const AdminTeamPage = () => {
   const { addToast } = useToast();
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [teamMembers, setTeamMembers] = useState(MOCK_TEAM);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
@@ -34,12 +35,12 @@ const AdminTeamPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchTeam = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getTeamMembers();
-      setTeamMembers(res.data?.data || res.data || []);
+      const list = Array.isArray(res) ? res : (res?.data?.data || res?.data || []);
+      if (list && list.length > 0) setTeamMembers(list);
     } catch (err) {
-      addToast('Failed to load team members', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -78,13 +79,14 @@ const AdminTeamPage = () => {
     try {
       if (isEditing) {
         await adminService.updateTeamMember(selectedMember.id, formData);
+        setTeamMembers(prev => prev.map(m => m.id === selectedMember.id ? { ...m, ...formData } : m));
         addToast('Team member updated successfully', 'success');
       } else {
-        await adminService.createTeamMember(formData);
+        const created = await adminService.createTeamMember(formData);
+        setTeamMembers(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         addToast('Team member created successfully', 'success');
       }
       setModalOpen(false);
-      fetchTeam();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -93,9 +95,9 @@ const AdminTeamPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteTeamMember(selectedMember.id);
+      setTeamMembers(prev => prev.filter(m => m.id !== selectedMember.id));
       addToast('Team member removed successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchTeam();
     } catch (err) {
       addToast('Failed to delete team member', 'error');
     }

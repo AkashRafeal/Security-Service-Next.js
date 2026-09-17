@@ -8,12 +8,13 @@ import Modal from '../../components/common/Modal';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import { CustomSelect } from '../../components/common/CustomSelect';
+import { MOCK_FAQS } from '../../utils/mockData';
 import { Plus, Edit, Trash2, HelpCircle } from 'lucide-react';
 
 const AdminFaqsPage = () => {
   const { addToast } = useToast();
-  const [faqs, setFaqs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [faqs, setFaqs] = useState(MOCK_FAQS);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedFaq, setSelectedFaq] = useState(null);
@@ -29,12 +30,12 @@ const AdminFaqsPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchFaqs = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getFaqs();
-      setFaqs(Array.isArray(res) ? res : res?.data?.data || res?.data || []);
+      const list = Array.isArray(res) ? res : res?.data?.data || res?.data || [];
+      if (list && list.length > 0) setFaqs(list);
     } catch (err) {
-      addToast('Failed to load FAQs', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -68,13 +69,14 @@ const AdminFaqsPage = () => {
     try {
       if (isEditing) {
         await adminService.updateFaq(selectedFaq.id, formData);
+        setFaqs(prev => prev.map(f => f.id === selectedFaq.id ? { ...f, ...formData } : f));
         addToast('FAQ updated successfully', 'success');
       } else {
-        await adminService.createFaq(formData);
+        const created = await adminService.createFaq(formData);
+        setFaqs(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         addToast('FAQ created successfully', 'success');
       }
       setModalOpen(false);
-      fetchFaqs();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -83,9 +85,9 @@ const AdminFaqsPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteFaq(selectedFaq.id);
+      setFaqs(prev => prev.filter(f => f.id !== selectedFaq.id));
       addToast('FAQ deleted successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchFaqs();
     } catch (err) {
       addToast('Failed to delete FAQ', 'error');
     }

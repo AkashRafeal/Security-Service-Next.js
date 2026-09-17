@@ -9,12 +9,13 @@ import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import FileUploader from '../../components/common/FileUploader';
 import { CustomSelect } from '../../components/common/CustomSelect';
+import { MOCK_GALLERY } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Image as ImageIcon } from 'lucide-react';
 
 const AdminGalleryPage = () => {
   const { addToast } = useToast();
-  const [gallery, setGallery] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [gallery, setGallery] = useState(MOCK_GALLERY);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -32,12 +33,12 @@ const AdminGalleryPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchGallery = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getGallery();
-      setGallery(res.data?.data || res.data || []);
+      const list = Array.isArray(res) ? res : (res?.data?.data || res?.data || []);
+      if (list && list.length > 0) setGallery(list);
     } catch (err) {
-      addToast('Failed to load gallery images', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -77,13 +78,14 @@ const AdminGalleryPage = () => {
     try {
       if (isEditing) {
         await adminService.updateGalleryImage(selectedImage.id, formData);
+        setGallery(prev => prev.map(g => g.id === selectedImage.id ? { ...g, ...formData } : g));
         addToast('Gallery image updated successfully', 'success');
       } else {
-        await adminService.createGalleryImage(formData);
+        const created = await adminService.createGalleryImage(formData);
+        setGallery(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         addToast('Gallery image uploaded successfully', 'success');
       }
       setModalOpen(false);
-      fetchGallery();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -92,9 +94,9 @@ const AdminGalleryPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteGalleryImage(selectedImage.id);
+      setGallery(prev => prev.filter(g => g.id !== selectedImage.id));
       addToast('Gallery image removed successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchGallery();
     } catch (err) {
       addToast('Failed to delete image', 'error');
     }

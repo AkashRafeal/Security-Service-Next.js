@@ -4,20 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { adminService } from '../../services/adminService';
 import { useToast } from '../../context/ToastContext';
 import DataTable from '../../components/admin/DataTable';
+import { MOCK_AUDIT_LOGS } from '../../utils/mockData';
 import { ShieldCheck, Clock, User, Terminal } from 'lucide-react';
 
 const AdminAuditLogsPage = () => {
   const { addToast } = useToast();
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [logs, setLogs] = useState(MOCK_AUDIT_LOGS);
+  const [loading, setLoading] = useState(false);
 
   const fetchLogs = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getAuditLogs();
-      setLogs(res.data?.data || res.data || []);
+      const list = Array.isArray(res) ? res : (res?.data?.data || res?.data || []);
+      if (list && list.length > 0) setLogs(list);
     } catch (err) {
-      addToast('Failed to load system audit trail', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }

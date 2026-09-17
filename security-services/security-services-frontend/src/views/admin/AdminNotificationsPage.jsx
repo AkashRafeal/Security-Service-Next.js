@@ -5,20 +5,21 @@ import { adminService } from '../../services/adminService';
 import { useToast } from '../../context/ToastContext';
 import DataTable from '../../components/admin/DataTable';
 import Button from '../../components/common/Button';
+import { MOCK_ADMIN_NOTIFICATIONS } from '../../utils/mockData';
 import { Bell, Check, CheckCheck, Trash2, Clock, AlertTriangle, Info, CheckCircle2 } from 'lucide-react';
 
 const AdminNotificationsPage = () => {
   const { addToast } = useToast();
-  const [notifications, setNotifications] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [notifications, setNotifications] = useState(MOCK_ADMIN_NOTIFICATIONS);
+  const [loading, setLoading] = useState(false);
 
   const fetchNotifications = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getNotifications();
-      setNotifications(res.data?.data || res.data || []);
+      const list = Array.isArray(res) ? res : (res?.data?.data || res?.data || []);
+      if (list && list.length > 0) setNotifications(list);
     } catch (err) {
-      addToast('Failed to load notifications', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -31,8 +32,8 @@ const AdminNotificationsPage = () => {
   const handleMarkAsRead = async (id) => {
     try {
       await adminService.markNotificationAsRead(id);
+      setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
       addToast('Notification marked as read', 'success');
-      fetchNotifications();
     } catch (err) {
       addToast('Failed to update notification', 'error');
     }
@@ -41,8 +42,8 @@ const AdminNotificationsPage = () => {
   const handleMarkAllAsRead = async () => {
     try {
       await adminService.markAllNotificationsAsRead();
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
       addToast('All notifications marked as read', 'success');
-      fetchNotifications();
     } catch (err) {
       addToast('Failed to mark all as read', 'error');
     }

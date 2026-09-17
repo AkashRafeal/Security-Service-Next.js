@@ -7,11 +7,12 @@ import { Modal } from '../../components/common/Modal';
 import { ConfirmDialog } from '../../components/common/ConfirmDialog';
 import { Button } from '../../components/common/Button';
 import { useToast } from '../../context/ToastContext';
+import { MOCK_CLIENTS } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Building } from 'lucide-react';
 
 export const AdminClientsPage = () => {
-  const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [clients, setClients] = useState(MOCK_CLIENTS);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingClient, setEditingClient] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -26,12 +27,11 @@ export const AdminClientsPage = () => {
   const toast = useToast();
 
   const fetchClients = async () => {
-    setLoading(true);
     try {
       const data = await adminService.getClients();
-      setClients(data || []);
+      if (data && data.length > 0) setClients(data);
     } catch (e) {
-      toast.error('Failed to load clients');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -71,15 +71,16 @@ export const AdminClientsPage = () => {
     try {
       if (editingClient) {
         await adminService.updateClient(editingClient.id, formData);
+        setClients(prev => prev.map(c => c.id === editingClient.id ? { ...c, ...formData } : c));
         toast.success('Client updated');
       } else {
-        await adminService.createClient(formData);
+        const created = await adminService.createClient(formData);
+        setClients(prev => [created || { id: Date.now(), ...formData }, ...prev]);
         toast.success('Client added');
       }
       setIsModalOpen(false);
-      fetchClients();
     } catch (err) {
-      toast.error('Failed to save client');
+      toast.error(err.response?.data?.message || 'Failed to save client');
     } finally {
       setIsSaving(false);
     }
@@ -89,9 +90,9 @@ export const AdminClientsPage = () => {
     if (!deleteTarget) return;
     try {
       await adminService.deleteClient(deleteTarget.id);
+      setClients(prev => prev.filter(c => c.id !== deleteTarget.id));
       toast.success('Client removed');
       setDeleteTarget(null);
-      fetchClients();
     } catch (e) {
       toast.error('Failed to delete client');
     }

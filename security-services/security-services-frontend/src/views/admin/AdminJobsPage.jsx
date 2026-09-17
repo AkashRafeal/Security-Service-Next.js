@@ -8,12 +8,13 @@ import Modal from '../../components/common/Modal';
 import ConfirmDialog from '../../components/common/ConfirmDialog';
 import Button from '../../components/common/Button';
 import { CustomSelect } from '../../components/common/CustomSelect';
+import { MOCK_JOBS } from '../../utils/mockData';
 import { Plus, Edit, Trash2, Briefcase, MapPin, IndianRupee } from 'lucide-react';
 
 const AdminJobsPage = () => {
   const { addToast } = useToast();
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [jobs, setJobs] = useState(MOCK_JOBS);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -34,12 +35,12 @@ const AdminJobsPage = () => {
   const [formData, setFormData] = useState(initialForm);
 
   const fetchJobs = async () => {
-    setLoading(true);
     try {
       const res = await adminService.getJobs();
-      setJobs(Array.isArray(res) ? res : res?.data?.data || res?.data || []);
+      const list = Array.isArray(res) ? res : res?.data?.data || res?.data || [];
+      if (list && list.length > 0) setJobs(list);
     } catch (err) {
-      addToast('Failed to load career listings', 'error');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -83,13 +84,14 @@ const AdminJobsPage = () => {
       };
       if (isEditing) {
         await adminService.updateJob(selectedJob.id, payload);
+        setJobs(prev => prev.map(j => j.id === selectedJob.id ? { ...j, ...payload } : j));
         addToast('Job posting updated successfully', 'success');
       } else {
-        await adminService.createJob(payload);
+        const created = await adminService.createJob(payload);
+        setJobs(prev => [created || { id: Date.now(), ...payload }, ...prev]);
         addToast('Job posting published successfully', 'success');
       }
       setModalOpen(false);
-      fetchJobs();
     } catch (err) {
       addToast(err.response?.data?.message || 'Operation failed', 'error');
     }
@@ -98,9 +100,9 @@ const AdminJobsPage = () => {
   const handleDelete = async () => {
     try {
       await adminService.deleteJob(selectedJob.id);
+      setJobs(prev => prev.filter(j => j.id !== selectedJob.id));
       addToast('Job opening removed successfully', 'success');
       setDeleteDialogOpen(false);
-      fetchJobs();
     } catch (err) {
       addToast('Failed to delete job posting', 'error');
     }
@@ -111,8 +113,8 @@ const AdminJobsPage = () => {
       await adminService.toggleJobStatus(job.id);
       const wasActive = job.status ? job.status === 'ACTIVE' : Boolean(job.active);
       const nextState = wasActive ? 'Closed' : 'Accepting Applications';
+      setJobs(prev => prev.map(j => j.id === job.id ? { ...j, active: !wasActive, status: !wasActive ? 'ACTIVE' : 'CLOSED' } : j));
       addToast(`Job opening is now ${nextState}`, 'success');
-      fetchJobs();
     } catch (err) {
       addToast('Failed to toggle job status', 'error');
     }

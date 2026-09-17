@@ -487,3 +487,160 @@ export const MOCK_SERVICE_CATEGORIES = [
   }
 ];
 
+export const MOCK_INDUSTRIES = [
+  {
+    id: 1,
+    name: 'Banking & Financial Institutions',
+    slug: 'banking-financial-institutions',
+    shortDescription: 'Vault defense, armed transit escorts, turnstile screening, and compliance auditing.',
+    description: 'High-security multi-tier physical and electronic defense programs safeguarding vaults, financial headquarters, cash processing centers, and retail branch networks.',
+    imageUrl: '/images/service_banking_finance.jpg',
+    keySecurityNeedsJson: JSON.stringify(['Vault & Safe Deposit Protection', 'Armored Cash Transit Escorts', 'Executive Floor Biometrics']),
+    solutionsJson: JSON.stringify(['Armed stationary protection officers', 'Anti-tailgating turnstile enforcement', 'Continuous biometric access verification']),
+    isActive: true
+  },
+  {
+    id: 2,
+    name: 'Warehousing, Supply Chain & Logistics',
+    slug: 'warehousing-logistics',
+    shortDescription: 'Gatehouse seal verification, yard roaming patrols, and cargo theft interdiction.',
+    description: 'Specialized supply chain defense preventing internal shrinkage, dock breach, and cargo theft across multi-acre intermodal freight terminals.',
+    imageUrl: '/images/service_warehouse_logistics.jpg',
+    keySecurityNeedsJson: JSON.stringify(['Cargo Seal Tampering Detection', 'Driver Manifest & Bill of Lading Audits', 'Large Perimeter Fence Intrusion']),
+    solutionsJson: JSON.stringify(['24/7 Gatehouse checkpoint logging', 'Randomized GPS mobile patrol sweeps', 'Thermal perimeter fence tripwires']),
+    isActive: true
+  },
+  {
+    id: 3,
+    name: 'Commercial Real Estate & Corporate Campuses',
+    slug: 'commercial-corporate-campuses',
+    shortDescription: 'Visitor badging kiosks, tenant escort services, and after-hours building lock-down.',
+    description: 'Turnkey physical security programs designed for Class-A office towers, corporate headquarters, multi-tenant campuses, and technology parks.',
+    imageUrl: '/images/hero_command_center.jpg',
+    keySecurityNeedsJson: JSON.stringify(['Lobby Concierge & Hospitality', 'After-Hours Tenant Verification', 'Emergency Evacuation Preparedness']),
+    solutionsJson: JSON.stringify(['Tactical hospitality trained guards', 'Electronic RFID wanding checkpoints', 'Dedicated building operations commander']),
+    isActive: true
+  }
+];
+
+export const MOCK_TEAM = [
+  {
+    id: 1,
+    name: 'Capt. Marcus Vance',
+    designation: 'Chief Security Officer & Tactical Commander',
+    bio: '22+ years in military intelligence and high-risk facility protection. Leads strategic operations and executive protection protocols.',
+    photoUrl: '/images/hero_security_officer.jpg',
+    experienceYears: 22,
+    certifications: 'CPP, PSP, Executive Protection Specialist',
+    email: 'm.vance@abcsecurity.com',
+    phone: '+1 (555) 019-2834',
+    displayOrder: 1,
+    active: true
+  },
+  {
+    id: 2,
+    name: 'Elena Rostova',
+    designation: 'Director of AI Telemetry & Dispatch Systems',
+    bio: 'Pioneered computerized central command architectures integrating AI video tripwires and autonomous patrol intercept algorithms.',
+    photoUrl: '/images/hero_command_center.jpg',
+    experienceYears: 14,
+    certifications: 'CISSP, Physical Security AI Fellow',
+    email: 'e.rostova@abcsecurity.com',
+    phone: '+1 (555) 019-4821',
+    displayOrder: 2,
+    active: true
+  },
+  {
+    id: 3,
+    name: 'David Reynolds',
+    designation: 'Regional Patrol Operations Superintendent',
+    bio: 'Oversees mobile tactical intercept fleets, GPS wanding compliance, and rapid emergency intervention details.',
+    photoUrl: '/images/hero_tactical_patrol.jpg',
+    experienceYears: 16,
+    certifications: 'POST Certified, Master Firearms Instructor',
+    email: 'd.reynolds@abcsecurity.com',
+    phone: '+1 (555) 019-7712',
+    displayOrder: 3,
+    active: true
+  }
+];
+
+export const MOCK_GALLERY = [
+  {
+    id: 1,
+    title: 'Central Command Center 24/7 Monitoring',
+    caption: 'Tier-4 secure video surveillance theater monitoring 4,000+ IP video channels simultaneously.',
+    category: 'Operations',
+    imageUrl: '/images/hero_command_center.jpg',
+    thumbnailUrl: '/images/hero_command_center.jpg',
+    displayOrder: 1,
+    featured: true
+  },
+  {
+    id: 2,
+    title: 'Mobile Tactical Patrol Fleet In Action',
+    caption: 'Rapid deployment patrol vehicles equipped with automated license plate recognition and real-time CAD sync.',
+    category: 'Patrol',
+    imageUrl: '/images/hero_tactical_patrol.jpg',
+    thumbnailUrl: '/images/hero_tactical_patrol.jpg',
+    displayOrder: 2,
+    featured: true
+  },
+  {
+    id: 3,
+    title: 'Corporate Turnstile Access & Guarding',
+    caption: 'Professional armed guards providing concierge screening and strict anti-tailgating protocols.',
+    category: 'Guarding',
+    imageUrl: '/images/hero_security_officer.jpg',
+    thumbnailUrl: '/images/hero_security_officer.jpg',
+    displayOrder: 3,
+    featured: true
+  },
+  {
+    id: 4,
+    title: 'Executive VIP Close Protection Detail',
+    caption: 'Discreet, armed personal protective detail escorting executive leadership through high-density urban corridors.',
+    category: 'Executive',
+    imageUrl: '/images/hero_executive_protection.jpg',
+    thumbnailUrl: '/images/hero_executive_protection.jpg',
+    displayOrder: 4,
+    featured: true
+  }
+];
+
+export const MOCK_BLOG_CATEGORIES = [
+  { id: 1, name: 'Threat Intelligence', slug: 'threat-intelligence', description: 'Emerging physical and cyber-physical security risk briefings.' },
+  { id: 2, name: 'AI & Security Tech', slug: 'ai-security-tech', description: 'Advances in cloud CCTV, telemetry, and automated access control.' },
+  { id: 3, name: 'Corporate Compliance', slug: 'corporate-compliance', description: 'Facility standards, OSHA physical security protocols, and auditing.' }
+];
+
+export const MOCK_BLOGS = [
+  {
+    id: 1,
+    title: 'Deploying AI-Powered Video Analytics to Mitigate Perimeter Breach',
+    slug: 'ai-powered-video-analytics-perimeter-breach',
+    summary: 'How intelligent tripwires and continuous optical analytics reduce false alarms while slashing intruder response latency to sub-60 seconds.',
+    content: 'Modern commercial perimeters can no longer rely on passive CCTV. By integrating edge AI detectors that distinguish human presence from wildlife and ambient motion, security operations centers can instantly trigger armed mobile interceptors.',
+    featuredImage: '/images/hero_command_center.jpg',
+    categoryId: 2,
+    tags: 'AI, CCTV, Perimeter Defense, Dispatch',
+    authorName: 'Elena Rostova',
+    status: 'PUBLISHED',
+    featured: true,
+    createdAt: '2026-09-10T10:00:00Z'
+  },
+  {
+    id: 2,
+    title: 'Class-A Commercial Tower Defense: Balancing Hospitality with Vigilance',
+    slug: 'commercial-tower-defense-hospitality-vigilance',
+    summary: 'A tactical breakdown of front-lobby concierge security, turnstile anti-tailgating mechanics, and tenant safety training.',
+    content: 'Corporate headquarters demand welcoming, highly professional security staff that simultaneously maintain ironclad visitor vetting and rapid lockdown readiness.',
+    featuredImage: '/images/hero_security_officer.jpg',
+    categoryId: 3,
+    tags: 'Corporate, Access Control, Guarding',
+    authorName: 'Capt. Marcus Vance',
+    status: 'PUBLISHED',
+    featured: true,
+    createdAt: '2026-09-12T14:30:00Z'
+  }
+];

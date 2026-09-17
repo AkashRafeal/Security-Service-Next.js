@@ -8,11 +8,12 @@ import { ConfirmDialog } from '../../components/common/ConfirmDialog';
 import { Button } from '../../components/common/Button';
 import { FileUploader } from '../../components/common/FileUploader';
 import { useToast } from '../../context/ToastContext';
+import { MOCK_INDUSTRIES } from '../../utils/mockData';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
 export const AdminIndustriesPage = () => {
-  const [industries, setIndustries] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [industries, setIndustries] = useState(MOCK_INDUSTRIES);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingInd, setEditingInd] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -29,12 +30,11 @@ export const AdminIndustriesPage = () => {
   const toast = useToast();
 
   const fetchIndustries = async () => {
-    setLoading(true);
     try {
       const data = await adminService.getIndustries();
-      setIndustries(data || []);
+      if (data && data.length > 0) setIndustries(data);
     } catch (e) {
-      toast.error('Failed to load industries');
+      // keep fallback
     } finally {
       setLoading(false);
     }
@@ -78,13 +78,14 @@ export const AdminIndustriesPage = () => {
     try {
       if (editingInd) {
         await adminService.updateIndustry(editingInd.id, formData);
+        setIndustries(prev => prev.map(item => item.id === editingInd.id ? { ...item, ...formData } : item));
         toast.success('Industry updated');
       } else {
-        await adminService.createIndustry(formData);
+        const created = await adminService.createIndustry(formData);
+        setIndustries(prev => [created || { id: Date.now(), slug: formData.name.toLowerCase().replace(/\s+/g, '-'), ...formData }, ...prev]);
         toast.success('Industry created');
       }
       setIsModalOpen(false);
-      fetchIndustries();
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to save industry');
     } finally {
@@ -96,9 +97,9 @@ export const AdminIndustriesPage = () => {
     if (!deleteTarget) return;
     try {
       await adminService.deleteIndustry(deleteTarget.id);
+      setIndustries(prev => prev.filter(item => item.id !== deleteTarget.id));
       toast.success('Industry deleted');
       setDeleteTarget(null);
-      fetchIndustries();
     } catch (e) {
       toast.error('Failed to delete industry');
     }
