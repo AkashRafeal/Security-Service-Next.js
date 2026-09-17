@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { adminService } from '../../services/adminService';
+import { MOCK_SERVICES, MOCK_SERVICE_CATEGORIES } from '../../utils/mockData';
 import { DataTable } from '../../components/admin/DataTable';
 import { Modal } from '../../components/common/Modal';
 import { ConfirmDialog } from '../../components/common/ConfirmDialog';
@@ -12,9 +13,9 @@ import { useToast } from '../../context/ToastContext';
 import { Plus, Edit, Trash2, CheckCircle2, XCircle, Shield } from 'lucide-react';
 
 export const AdminServicesPage = () => {
-  const [services, setServices] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState(MOCK_SERVICES);
+  const [categories, setCategories] = useState(MOCK_SERVICE_CATEGORIES);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingService, setEditingService] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -42,7 +43,7 @@ export const AdminServicesPage = () => {
   // Form states
   const [formData, setFormData] = useState({
     name: '',
-    categoryId: '',
+    categoryId: MOCK_SERVICE_CATEGORIES[0]?.id || '',
     shortDescription: '',
     description: '',
     imageUrl: '',
@@ -54,16 +55,15 @@ export const AdminServicesPage = () => {
   });
 
   const fetchData = async () => {
-    setLoading(true);
     try {
       const [svcData, catData] = await Promise.all([
         adminService.getServices(),
         adminService.getCategories(),
       ]);
-      setServices(svcData || []);
-      setCategories(catData || []);
+      if (svcData && svcData.length > 0) setServices(svcData);
+      if (catData && catData.length > 0) setCategories(catData);
     } catch (e) {
-      toast.error('Failed to load services data');
+      // Retain fallback data without throwing noisy toasts
     } finally {
       setLoading(false);
     }

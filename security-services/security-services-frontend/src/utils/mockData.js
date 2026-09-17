@@ -449,3 +449,41 @@ export const MOCK_USERS = [
   }
 ];
 
+export const MOCK_SERVICE_CATEGORIES = [
+  {
+    id: 1,
+    name: 'Guarding Corps',
+    slug: 'guarding-corps',
+    description: 'Armed & unarmed stationary security officers for corporate access control and facilities.',
+    icon: 'Shield'
+  },
+  {
+    id: 2,
+    name: 'Executive Detail',
+    slug: 'executive-detail',
+    description: 'Close protection bodyguards, secure motorcade drivers, and advance route scouting for principals.',
+    icon: 'ShieldCheck'
+  },
+  {
+    id: 3,
+    name: 'Command & Control',
+    slug: 'command-and-control',
+    description: '24/7 AI-assisted video surveillance center, alarm monitoring, and sub-minute armed dispatch.',
+    icon: 'Radio'
+  },
+  {
+    id: 4,
+    name: 'Patrol Division',
+    slug: 'patrol-division',
+    description: 'Marked tactical patrol interceptors performing GPS-geofenced sweeps and randomized deterrence.',
+    icon: 'Award'
+  },
+  {
+    id: 5,
+    name: 'Critical Infrastructure',
+    slug: 'critical-infrastructure',
+    description: 'Hardened protocols for data centers, industrial plants, logistics distribution, and utilities.',
+    icon: 'Building2'
+  }
+];
+

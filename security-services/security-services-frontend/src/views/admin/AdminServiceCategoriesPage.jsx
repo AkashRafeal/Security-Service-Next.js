@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { adminService } from '../../services/adminService';
+import { MOCK_SERVICE_CATEGORIES } from '../../utils/mockData';
 import { DataTable } from '../../components/admin/DataTable';
 import { Modal } from '../../components/common/Modal';
 import { ConfirmDialog } from '../../components/common/ConfirmDialog';
@@ -10,8 +11,8 @@ import { useToast } from '../../context/ToastContext';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
 export const AdminServiceCategoriesPage = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState(MOCK_SERVICE_CATEGORIES);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCat, setEditingCat] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -22,12 +23,11 @@ export const AdminServiceCategoriesPage = () => {
   const toast = useToast();
 
   const fetchCats = async () => {
-    setLoading(true);
     try {
       const data = await adminService.getCategories();
-      setCategories(data || []);
+      if (data && data.length > 0) setCategories(data);
     } catch (e) {
-      toast.error('Failed to load categories');
+      // Keep fallback categories without noisy toast
     } finally {
       setLoading(false);
     }

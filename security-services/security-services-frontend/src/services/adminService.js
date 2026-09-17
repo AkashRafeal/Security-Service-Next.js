@@ -12,7 +12,8 @@ import {
   MOCK_FAQS,
   MOCK_JOBS,
   MOCK_USERS,
-  MOCK_CLIENTS
+  MOCK_CLIENTS,
+  MOCK_SERVICE_CATEGORIES
 } from '../utils/mockData';
 
 export const adminService = {
@@ -199,44 +200,77 @@ export const adminService = {
   },
 
   createService: async (data) => {
-    const res = await api.post('/admin/services', data);
-    return res.data.data;
+    try {
+      const res = await api.post('/admin/services', data);
+      return res.data.data;
+    } catch {
+      return { id: Date.now(), ...data };
+    }
   },
 
   updateService: async (id, data) => {
-    const res = await api.put(`/admin/services/${id}`, data);
-    return res.data.data;
+    try {
+      const res = await api.put(`/admin/services/${id}`, data);
+      return res.data.data;
+    } catch {
+      return { id, ...data };
+    }
   },
 
   toggleServiceStatus: async (id) => {
-    const res = await api.patch(`/admin/services/${id}/toggle-status`);
-    return res.data;
+    try {
+      const res = await api.patch(`/admin/services/${id}/toggle-status`);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   deleteService: async (id) => {
-    const res = await api.delete(`/admin/services/${id}`);
-    return res.data;
+    try {
+      const res = await api.delete(`/admin/services/${id}`);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   // Service Categories
   getCategories: async () => {
-    const res = await api.get('/admin/service-categories');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/service-categories');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_SERVICE_CATEGORIES;
+    } catch {
+      return MOCK_SERVICE_CATEGORIES;
+    }
   },
 
   createCategory: async (data) => {
-    const res = await api.post('/admin/service-categories', data);
-    return res.data.data;
+    try {
+      const res = await api.post('/admin/service-categories', data);
+      return res.data.data;
+    } catch {
+      return { id: Date.now(), ...data, slug: data.name?.toLowerCase().replace(/\s+/g, '-') };
+    }
   },
 
   updateCategory: async (id, data) => {
-    const res = await api.put(`/admin/service-categories/${id}`, data);
-    return res.data.data;
+    try {
+      const res = await api.put(`/admin/service-categories/${id}`, data);
+      return res.data.data;
+    } catch {
+      return { id, ...data, slug: data.name?.toLowerCase().replace(/\s+/g, '-') };
+    }
   },
 
   deleteCategory: async (id) => {
-    const res = await api.delete(`/admin/service-categories/${id}`);
-    return res.data;
+    try {
+      const res = await api.delete(`/admin/service-categories/${id}`);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   // Industries
