@@ -182,3 +182,270 @@ export const MOCK_CLIENTS = [
   { id: 4, name: 'Sterling Financial Group', logoUrl: '/images/service_banking_finance.jpg', industry: 'Banking & Asset Management' }
 ];
 
+export const DEMO_USERS = {
+  admin: {
+    id: 1,
+    username: 'admin',
+    email: 'admin@abcsecurity.com',
+    fullName: 'Chief Operations Commander (Demo Admin)',
+    roles: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_STAFF'],
+    token: 'demo-jwt-token-admin-session'
+  },
+  user: {
+    id: 2,
+    username: 'user',
+    email: 'client@horizon.com',
+    fullName: 'Sarah Jenkins (Demo Client)',
+    roles: ['ROLE_USER', 'ROLE_CLIENT'],
+    token: 'demo-jwt-token-user-session'
+  }
+};
+
+export const MOCK_ADMIN_STATS = {
+  totalEnquiries: 48,
+  pendingEnquiries: 7,
+  totalQuotes: 32,
+  pendingQuotes: 5,
+  totalApplications: 64,
+  pendingApplications: 12,
+  activeServices: 13,
+  totalTestimonials: 18,
+  totalClients: 24,
+  totalJobs: 6,
+  totalFaqs: 15,
+  enquiriesByMonth: [
+    { month: 'Apr', count: 18 },
+    { month: 'May', count: 24 },
+    { month: 'Jun', count: 29 },
+    { month: 'Jul', count: 35 },
+    { month: 'Aug', count: 42 },
+    { month: 'Sep', count: 48 }
+  ],
+  quotesByMonth: [
+    { month: 'Apr', count: 12 },
+    { month: 'May', count: 15 },
+    { month: 'Jun', count: 20 },
+    { month: 'Jul', count: 26 },
+    { month: 'Aug', count: 28 },
+    { month: 'Sep', count: 32 }
+  ],
+  quoteStatusDistribution: {
+    'PENDING': 5,
+    'UNDER_REVIEW': 8,
+    'PROPOSAL_SENT': 11,
+    'ACCEPTED': 6,
+    'REJECTED': 2
+  },
+  serviceDemand: [
+    { name: 'Armed Security Corps', requests: 14 },
+    { name: 'Executive VIP Detail', requests: 9 },
+    { name: 'AI CCTV Remote Dispatch', requests: 8 },
+    { name: 'Mobile Tactical Patrols', requests: 6 }
+  ]
+};
+
+export const MOCK_ADMIN_QUOTES = [
+  {
+    id: 1,
+    quoteNumber: 'QT-2026-0891',
+    fullName: 'Marcus Vance',
+    email: 'marcus.vance@apexcre.com',
+    phone: '+1 (212) 555-0192',
+    company: 'Apex Commercial Real Estate',
+    serviceName: 'Corporate Armed Security & Access Control',
+    guardCount: 6,
+    coverageType: '24/7 Continuous Shift',
+    status: 'UNDER_REVIEW',
+    createdAt: '2026-09-15T10:30:00Z',
+    estimatedBudget: '$24,000 / mo',
+    location: 'Manhattan, New York'
+  },
+  {
+    id: 2,
+    quoteNumber: 'QT-2026-0892',
+    fullName: 'Elena Rostova',
+    email: 'elena@novatechcorp.io',
+    phone: '+1 (415) 555-0843',
+    company: 'NovaTech Campus',
+    serviceName: '24/7 AI Cloud CCTV Surveillance & Dispatch',
+    guardCount: 2,
+    coverageType: 'Overnight & Weekend Shift',
+    status: 'PROPOSAL_SENT',
+    createdAt: '2026-09-14T14:15:00Z',
+    estimatedBudget: '$12,500 / mo',
+    location: 'Jersey City, NJ'
+  },
+  {
+    id: 3,
+    quoteNumber: 'QT-2026-0893',
+    fullName: 'Jonathan Price',
+    email: 'j.price@triadenergy.com',
+    phone: '+1 (713) 555-9011',
+    company: 'Triad Industrial Logistics',
+    serviceName: 'Tactical Armed Patrol & Perimeter Interceptors',
+    guardCount: 4,
+    coverageType: '24/7 Mobile Interceptor Fleet',
+    status: 'PENDING',
+    createdAt: '2026-09-16T09:00:00Z',
+    estimatedBudget: '$18,000 / mo',
+    location: 'Houston, TX'
+  }
+];
+
+export const MOCK_ADMIN_ENQUIRIES = [
+  {
+    id: 1,
+    name: 'David Sterling',
+    email: 'd.sterling@globalholdings.com',
+    phone: '+1 (312) 555-7788',
+    subject: 'VIP Motorcade detail for annual board summit',
+    message: 'We require 3 armored escort vehicles and 6 close protection operatives for a 4-day summit in downtown Chicago.',
+    status: 'NEW',
+    createdAt: '2026-09-16T11:20:00Z'
+  },
+  {
+    id: 2,
+    name: 'Rebecca Torres',
+    email: 'rtorres@metrowarehouse.net',
+    phone: '+1 (201) 555-4321',
+    subject: 'Distribution center gate check audit inquiry',
+    message: 'Looking to audit and upgrade our existing 24-hour gate security and driver badging protocols.',
+    status: 'IN_PROGRESS',
+    createdAt: '2026-09-15T16:45:00Z'
+  }
+];
+
+export const MOCK_ADMIN_APPLICATIONS = [
+  {
+    id: 1,
+    jobTitle: 'Tactical Armed Protection Officer',
+    candidateName: 'Derek Miller',
+    email: 'derek.miller.mil@gmail.com',
+    phone: '+1 (555) 342-9901',
+    experienceYears: 6,
+    status: 'UNDER_REVIEW',
+    appliedAt: '2026-09-16T08:30:00Z'
+  },
+  {
+    id: 2,
+    jobTitle: 'Central Command Center Dispatcher',
+    candidateName: 'Rachel Adams',
+    email: 'rachel.adams92@outlook.com',
+    phone: '+1 (555) 789-2114',
+    experienceYears: 4,
+    status: 'SHORTLISTED',
+    appliedAt: '2026-09-14T13:10:00Z'
+  }
+];
+
+export const MOCK_ADMIN_NOTIFICATIONS = [
+  {
+    id: 1,
+    title: 'New Enterprise Quote Request',
+    message: 'Marcus Vance from Apex Commercial requested a 6-guard 24/7 security detail.',
+    type: 'QUOTE',
+    read: false,
+    createdAt: '2026-09-16T11:00:00Z'
+  },
+  {
+    id: 2,
+    title: 'Candidate Application Submitted',
+    message: 'Derek Miller applied for Tactical Armed Protection Officer.',
+    type: 'APPLICATION',
+    read: false,
+    createdAt: '2026-09-16T08:30:00Z'
+  }
+];
+
+export const MOCK_AUDIT_LOGS = [
+  {
+    id: 1,
+    action: 'USER_LOGIN',
+    username: 'admin',
+    target: 'Auth',
+    targetId: 1,
+    details: 'Administrator session authenticated via Command Portal',
+    ipAddress: '127.0.0.1',
+    createdAt: '2026-09-17T08:15:00Z'
+  },
+  {
+    id: 2,
+    action: 'DISPATCH_UPDATE',
+    username: 'admin',
+    target: 'Patrol',
+    targetId: 14,
+    details: 'Sector 4 patrol rover route checkpoint synced',
+    ipAddress: '127.0.0.1',
+    createdAt: '2026-09-17T07:45:00Z'
+  }
+];
+
+export const MOCK_JOBS = [
+  {
+    id: 1,
+    title: 'Tactical Armed Protection Officer',
+    slug: 'tactical-armed-protection-officer',
+    department: 'Field Operations',
+    location: 'New York Metro Area',
+    type: 'Full-Time',
+    experienceLevel: 'Senior / 3+ Years Tactical',
+    salaryRange: '$65,000 - $85,000 / year',
+    description: 'Provide high-visibility armed deterrent security, emergency tactical response, and access point protection for high-profile commercial properties.',
+    isActive: true
+  },
+  {
+    id: 2,
+    title: '24/7 Central Command Center Dispatcher',
+    slug: 'central-command-dispatcher',
+    department: 'Communications & Telemetry',
+    location: 'Command HQ',
+    type: 'Full-Time',
+    experienceLevel: '2+ Years CCTV / CAD Experience',
+    salaryRange: '$52,000 - $68,000 / year',
+    description: 'Monitor multi-site AI video alarm triggers, coordinate armed patrol interceptors, and maintain comprehensive incident CAD logs.',
+    isActive: true
+  },
+  {
+    id: 3,
+    title: 'VIP Close Protection Specialist',
+    slug: 'vip-close-protection-specialist',
+    department: 'Executive Detail',
+    location: 'Tri-State Area / Traveling',
+    type: 'Full-Time',
+    experienceLevel: 'Prior Military / Law Enforcement Detail',
+    salaryRange: '$95,000 - $130,000 / year',
+    description: 'Perform advance venue intelligence surveys, motorcade driving, and physical close protection for visiting executives and board leaders.',
+    isActive: true
+  }
+];
+
+export const MOCK_USERS = [
+  {
+    id: 1,
+    username: 'admin',
+    email: 'admin@abcsecurity.com',
+    fullName: 'Chief Operations Commander (Admin)',
+    role: 'ADMIN',
+    enabled: true,
+    createdAt: '2026-01-10T00:00:00Z'
+  },
+  {
+    id: 2,
+    username: 'user',
+    email: 'client@horizon.com',
+    fullName: 'Sarah Jenkins (Client)',
+    role: 'USER',
+    enabled: true,
+    createdAt: '2026-02-15T00:00:00Z'
+  },
+  {
+    id: 3,
+    username: 'dispatch_lead',
+    email: 'dispatch@abcsecurity.com',
+    fullName: 'Marcus Cole (Dispatch Supervisor)',
+    role: 'STAFF',
+    enabled: true,
+    createdAt: '2026-03-01T00:00:00Z'
+  }
+];
+

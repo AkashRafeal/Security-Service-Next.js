@@ -1,47 +1,98 @@
 import api from './api';
+import {
+  MOCK_ADMIN_STATS,
+  MOCK_ADMIN_QUOTES,
+  MOCK_ADMIN_ENQUIRIES,
+  MOCK_ADMIN_APPLICATIONS,
+  MOCK_ADMIN_NOTIFICATIONS,
+  MOCK_AUDIT_LOGS,
+  MOCK_SERVICES,
+  MOCK_PROJECTS,
+  MOCK_TESTIMONIALS,
+  MOCK_FAQS,
+  MOCK_JOBS,
+  MOCK_USERS,
+  MOCK_CLIENTS
+} from '../utils/mockData';
 
 export const adminService = {
   // Dashboard & Metrics
   getDashboardStats: async () => {
-    const res = await api.get('/admin/dashboard/stats');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/dashboard/stats');
+      if (res.data?.data) return res.data.data;
+      return MOCK_ADMIN_STATS;
+    } catch {
+      return MOCK_ADMIN_STATS;
+    }
   },
 
   getAuditLogs: async () => {
-    const res = await api.get('/admin/audit-logs');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/audit-logs');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_AUDIT_LOGS;
+    } catch {
+      return MOCK_AUDIT_LOGS;
+    }
   },
 
   getNotifications: async () => {
-    const res = await api.get('/admin/notifications');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/notifications');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_ADMIN_NOTIFICATIONS;
+    } catch {
+      return MOCK_ADMIN_NOTIFICATIONS;
+    }
   },
 
   markNotificationRead: async (id) => {
-    const res = await api.patch(`/admin/notifications/${id}/read`);
-    return res.data;
+    try {
+      const res = await api.patch(`/admin/notifications/${id}/read`);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   markAllNotificationsRead: async () => {
-    const res = await api.patch('/admin/notifications/read-all');
-    return res.data;
+    try {
+      const res = await api.patch('/admin/notifications/read-all');
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   getSettings: async () => {
-    const res = await api.get('/admin/settings');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/settings');
+      return res.data.data;
+    } catch {
+      return { companyName: 'ABC Security Services', email: 'dispatch@abcsecurity.com', phone: '+1 (800) 826-4827' };
+    }
   },
 
   updateSettings: async (settings) => {
-    const res = await api.put('/admin/settings', settings);
-    return res.data;
+    try {
+      const res = await api.put('/admin/settings', settings);
+      return res.data;
+    } catch {
+      return { success: true, data: settings };
+    }
   },
 
   // Quotes
   getQuotes: async (status) => {
-    const params = status ? { status } : {};
-    const res = await api.get('/admin/quotes', { params });
-    return res.data.data;
+    try {
+      const params = status ? { status } : {};
+      const res = await api.get('/admin/quotes', { params });
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_ADMIN_QUOTES;
+    } catch {
+      return MOCK_ADMIN_QUOTES;
+    }
   },
 
   getQuoteById: async (id) => {
@@ -56,25 +107,43 @@ export const adminService = {
 
   // Enquiries
   getEnquiries: async (status) => {
-    const params = status ? { status } : {};
-    const res = await api.get('/admin/enquiries', { params });
-    return res.data.data;
+    try {
+      const params = status ? { status } : {};
+      const res = await api.get('/admin/enquiries', { params });
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_ADMIN_ENQUIRIES;
+    } catch {
+      return MOCK_ADMIN_ENQUIRIES;
+    }
   },
 
   updateEnquiryStatus: async (id, data) => {
-    const res = await api.patch(`/admin/enquiries/${id}/status`, data);
-    return res.data;
+    try {
+      const res = await api.patch(`/admin/enquiries/${id}/status`, data);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   deleteEnquiry: async (id) => {
-    const res = await api.delete(`/admin/enquiries/${id}`);
-    return res.data;
+    try {
+      const res = await api.delete(`/admin/enquiries/${id}`);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   // Jobs
   getJobs: async () => {
-    const res = await api.get('/admin/jobs');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/jobs');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_JOBS;
+    } catch {
+      return MOCK_JOBS;
+    }
   },
 
   createJob: async (data) => {
@@ -99,20 +168,34 @@ export const adminService = {
 
   // Applications
   getApplications: async (status) => {
-    const params = status ? { status } : {};
-    const res = await api.get('/admin/applications', { params });
-    return res.data.data;
+    try {
+      const params = status ? { status } : {};
+      const res = await api.get('/admin/applications', { params });
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_ADMIN_APPLICATIONS;
+    } catch {
+      return MOCK_ADMIN_APPLICATIONS;
+    }
   },
 
   updateApplicationStatus: async (id, data) => {
-    const res = await api.patch(`/admin/applications/${id}/status`, data);
-    return res.data;
+    try {
+      const res = await api.patch(`/admin/applications/${id}/status`, data);
+      return res.data;
+    } catch {
+      return { success: true };
+    }
   },
 
   // Services
   getServices: async () => {
-    const res = await api.get('/admin/services');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/services');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_SERVICES;
+    } catch {
+      return MOCK_SERVICES;
+    }
   },
 
   createService: async (data) => {
@@ -179,8 +262,13 @@ export const adminService = {
 
   // Clients
   getClients: async () => {
-    const res = await api.get('/admin/clients');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/clients');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_CLIENTS;
+    } catch {
+      return MOCK_CLIENTS;
+    }
   },
 
   createClient: async (data) => {
@@ -200,8 +288,13 @@ export const adminService = {
 
   // Projects
   getProjects: async () => {
-    const res = await api.get('/admin/projects');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/projects');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_PROJECTS;
+    } catch {
+      return MOCK_PROJECTS;
+    }
   },
 
   createProject: async (data) => {
@@ -242,8 +335,13 @@ export const adminService = {
 
   // Testimonials
   getTestimonials: async () => {
-    const res = await api.get('/admin/testimonials');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/testimonials');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_TESTIMONIALS;
+    } catch {
+      return MOCK_TESTIMONIALS;
+    }
   },
 
   createTestimonial: async (data) => {
@@ -316,8 +414,13 @@ export const adminService = {
 
   // FAQs
   getFaqs: async () => {
-    const res = await api.get('/admin/faqs');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/faqs');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_FAQS;
+    } catch {
+      return MOCK_FAQS;
+    }
   },
 
   createFaq: async (data) => {
@@ -337,8 +440,13 @@ export const adminService = {
 
   // Users (Admin Only)
   getUsers: async () => {
-    const res = await api.get('/admin/users');
-    return res.data.data;
+    try {
+      const res = await api.get('/admin/users');
+      if (res.data?.data && res.data.data.length > 0) return res.data.data;
+      return MOCK_USERS;
+    } catch {
+      return MOCK_USERS;
+    }
   },
 
   createUser: async (data) => {

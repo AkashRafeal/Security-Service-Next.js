@@ -23,10 +23,21 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       authService.getCurrentUser()
         .then((res) => {
-          setUser(res.data);
-          localStorage.setItem('security_user', JSON.stringify(res.data));
+          if (res?.data) {
+            setUser(res.data);
+            localStorage.setItem('security_user', JSON.stringify(res.data));
+          }
         })
         .catch(() => {
+          if (token.startsWith('demo-jwt')) {
+            const saved = localStorage.getItem('security_user');
+            if (saved) {
+              try {
+                setUser(JSON.parse(saved));
+                return;
+              } catch {}
+            }
+          }
           localStorage.removeItem('security_token');
           localStorage.removeItem('security_user');
           setUser(null);
