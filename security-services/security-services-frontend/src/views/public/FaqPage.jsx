@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { publicService } from '../../services/publicService';
+import { MOCK_FAQS } from '../../utils/mockData';
 import { FAQAccordion } from '../../components/public/FAQAccordion';
 import { SearchBar } from '../../components/common/SearchBar';
 import { Loader } from '../../components/common/Loader';
@@ -10,14 +11,16 @@ import Link from 'next/link';
 import { Button } from '../../components/common/Button';
 
 export const FaqPage = () => {
-  const [faqs, setFaqs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [faqs, setFaqs] = useState(MOCK_FAQS);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   useEffect(() => {
     publicService.getFaqs()
-      .then((data) => setFaqs(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setFaqs(data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

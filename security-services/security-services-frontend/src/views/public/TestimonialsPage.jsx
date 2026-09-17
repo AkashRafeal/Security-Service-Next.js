@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { publicService } from '../../services/publicService';
+import { MOCK_TESTIMONIALS } from '../../utils/mockData';
 import { TestimonialCard } from '../../components/public/TestimonialCard';
 import { Loader } from '../../components/common/Loader';
 import { Star, ShieldCheck } from 'lucide-react';
@@ -9,12 +10,14 @@ import Link from 'next/link';
 import { Button } from '../../components/common/Button';
 
 export const TestimonialsPage = () => {
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [testimonials, setTestimonials] = useState(MOCK_TESTIMONIALS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     publicService.getTestimonials()
-      .then((data) => setTestimonials(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setTestimonials(data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

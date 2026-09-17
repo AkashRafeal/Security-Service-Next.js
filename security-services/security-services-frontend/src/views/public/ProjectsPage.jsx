@@ -2,16 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { publicService } from '../../services/publicService';
+import { MOCK_PROJECTS } from '../../utils/mockData';
 import { ProjectCard } from '../../components/public/ProjectCard';
 import { Loader } from '../../components/common/Loader';
 
 export const ProjectsPage = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState(MOCK_PROJECTS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     publicService.getProjects()
-      .then((data) => setProjects(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setProjects(data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

@@ -2,18 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { publicService } from '../../services/publicService';
+import { MOCK_CLIENTS } from '../../utils/mockData';
 import { Loader } from '../../components/common/Loader';
 import { Handshake, ShieldCheck, Building2, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '../../components/common/Button';
 
 export const ClientsPage = () => {
-  const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [clients, setClients] = useState(MOCK_CLIENTS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     publicService.getClients()
-      .then((data) => setClients(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setClients(data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);

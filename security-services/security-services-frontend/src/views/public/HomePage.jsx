@@ -25,16 +25,31 @@ import { FAQAccordion } from '../../components/public/FAQAccordion';
 import { ContactForm } from '../../components/public/ContactForm';
 import { Button } from '../../components/common/Button';
 import { publicService } from '../../services/publicService';
+import { MOCK_SERVICES, MOCK_TESTIMONIALS, MOCK_FAQS } from '../../utils/mockData';
 
 export const HomePage = () => {
-  const [featuredServices, setFeaturedServices] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [faqs, setFaqs] = useState([]);
+  const [featuredServices, setFeaturedServices] = useState(MOCK_SERVICES.slice(0, 3));
+  const [testimonials, setTestimonials] = useState(MOCK_TESTIMONIALS.slice(0, 3));
+  const [faqs, setFaqs] = useState(MOCK_FAQS.slice(0, 5));
 
   useEffect(() => {
-    publicService.getFeaturedServices().then((data) => setFeaturedServices(data?.slice(0, 3) || [])).catch(() => {});
-    publicService.getTestimonials().then((data) => setTestimonials(data?.slice(0, 3) || [])).catch(() => {});
-    publicService.getFaqs().then((data) => setFaqs(data?.slice(0, 5) || [])).catch(() => {});
+    publicService.getFeaturedServices()
+      .then((data) => {
+        if (data && data.length > 0) setFeaturedServices(data.slice(0, 3));
+      })
+      .catch(() => {});
+
+    publicService.getTestimonials()
+      .then((data) => {
+        if (data && data.length > 0) setTestimonials(data.slice(0, 3));
+      })
+      .catch(() => {});
+
+    publicService.getFaqs()
+      .then((data) => {
+        if (data && data.length > 0) setFaqs(data.slice(0, 5));
+      })
+      .catch(() => {});
   }, []);
 
   return (

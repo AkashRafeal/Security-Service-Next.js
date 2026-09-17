@@ -8,22 +8,27 @@ import { SearchBar } from '../../components/common/SearchBar';
 import { Button } from '../../components/common/Button';
 import { Loader } from '../../components/common/Loader';
 import { publicService } from '../../services/publicService';
+import { MOCK_SERVICES, MOCK_CLIENTS } from '../../utils/mockData';
 
 export const ServicesPage = () => {
-  const [services, setServices] = useState([]);
-  const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState(MOCK_SERVICES);
+  const [clients, setClients] = useState(MOCK_CLIENTS);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   useEffect(() => {
     publicService.getServices()
-      .then((data) => setServices(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setServices(data);
+      })
       .catch(() => {})
       .finally(() => setLoading(false));
 
     publicService.getClients()
-      .then((data) => setClients(data || []))
+      .then((data) => {
+        if (data && data.length > 0) setClients(data);
+      })
       .catch(() => {});
   }, []);
 
