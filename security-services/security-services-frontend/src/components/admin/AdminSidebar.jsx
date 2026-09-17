@@ -151,8 +151,8 @@ export const AdminSidebar = ({ isOpen, onClose }) => {
               </div>
             </div>
             <button
-              onClick={logout}
-              title="Logout"
+              onClick={() => logout('/')}
+              aria-label="Logout"
               className="p-1.5 text-slate-400 hover:text-rose-400 transition-colors rounded-lg hover:bg-rose-500/10"
             >
               <LogOut className="w-4 h-4" />

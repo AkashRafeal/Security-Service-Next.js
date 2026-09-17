@@ -75,11 +75,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = (redirectUrl = '/') => {
+    const destination = typeof redirectUrl === 'string' && redirectUrl.startsWith('/') ? redirectUrl : '/';
     if (typeof window !== 'undefined') {
       localStorage.removeItem('security_token');
       localStorage.removeItem('security_user');
       setUser(null);
-      window.location.href = redirectUrl;
+      window.location.href = destination;
     }
   };
 

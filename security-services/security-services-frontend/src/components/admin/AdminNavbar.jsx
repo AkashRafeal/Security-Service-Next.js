@@ -119,9 +119,9 @@ export const AdminNavbar = ({ onToggleSidebar }) => {
             {user?.fullName || 'User'}
           </span>
           <button
-            onClick={logout}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-            title="Sign Out"
+            onClick={() => logout('/')}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 active:bg-rose-500/20 transition-colors flex items-center justify-center"
+            aria-label="Sign Out"
           >
             <LogOut className="w-4 h-4" />
           </button>
