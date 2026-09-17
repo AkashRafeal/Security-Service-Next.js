@@ -2,8 +2,43 @@ import '../index.css';
 import ClientProviders from '../components/providers/ClientProviders';
 
 export const metadata = {
-  title: 'Vanguard Defense & Security Solutions | Elite Corporate & Tactical Security',
-  description: 'Vanguard Security Services - Tactical operations management, armed guarding, executive protection, K9 security, and surveillance solutions.',
+  metadataBase: new URL('https://security-service-next-js.vercel.app'),
+  title: 'ABC Security Services | Tactical & Corporate Security Solutions',
+  description: 'ABC Security Services - Professional tactical operations, armed guarding, executive protection, 24/7 command dispatch, and commercial facility security.',
+  applicationName: 'ABC Security Services',
+  keywords: [
+    'ABC Security Services',
+    'Tactical Security',
+    'Armed Guards',
+    'Executive Protection',
+    'Corporate Security',
+    'Facility Protection'
+  ],
+  openGraph: {
+    title: 'ABC Security Services | Tactical & Corporate Security Solutions',
+    description: 'ABC Security Services - Professional tactical operations, armed guarding, executive protection, 24/7 command dispatch, and commercial facility security.',
+    url: 'https://security-service-next-js.vercel.app',
+    siteName: 'ABC Security Services',
+    images: [
+      {
+        url: '/images/hero_executive_protection.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'ABC Security Services - Tactical & Corporate Security'
+      }
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ABC Security Services | Tactical & Corporate Security Solutions',
+    description: 'ABC Security Services - Professional tactical operations, armed guarding, executive protection, and 24/7 command dispatch.',
+    images: ['/images/hero_executive_protection.jpg'],
+  },
+  icons: {
+    icon: '/shield.svg',
+  }
 };
 
 export default function RootLayout({ children }) {
