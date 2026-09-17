@@ -179,7 +179,9 @@ export const HomePage = () => {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="card-hover-effect cursor-pointer group p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-start relative hover:border-amber-400 transition-all min-h-[145px]"
+                className={`card-hover-effect cursor-pointer group p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-start relative hover:border-amber-400 transition-all min-h-[145px] ${
+                  idx === 6 ? 'col-span-2 sm:col-span-1 justify-self-center w-[calc(50%-6px)] sm:w-full' : ''
+                }`}
               >
                 {/* Chain Node Link */}
                 <div className="w-8 h-8 rounded-full bg-amber-50 border-2 border-amber-400 text-amber-700 font-black text-xs flex items-center justify-center mb-2.5 shadow-xs group-hover:bg-amber-500 group-hover:text-white group-hover:border-amber-500 group-hover:scale-110 transition-all z-10">
