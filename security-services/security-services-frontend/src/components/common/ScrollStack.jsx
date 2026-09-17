@@ -153,9 +153,9 @@ const ScrollStack = ({
             }}
             aria-label="Previous card"
             title="Previous Card"
-            className="absolute left-2 sm:-left-6 lg:-left-9 top-[40%] sm:top-1/2 -translate-y-1/2 z-[70] w-8 h-8 sm:w-10 sm:h-10 bg-white/90 sm:bg-white/80 shadow-md backdrop-blur-sm rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+            className="absolute left-2 sm:-left-6 lg:-left-9 top-1/2 -translate-y-1/2 z-[70] w-9 h-9 sm:w-10 sm:h-10 bg-white/90 sm:bg-white/80 shadow-md backdrop-blur-sm rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 hover:scale-110 active:scale-95 transition-all cursor-pointer"
           >
-            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
           </button>
 
           <button
@@ -167,9 +167,9 @@ const ScrollStack = ({
             }}
             aria-label="Next card"
             title="Next Card"
-            className="absolute right-2 sm:-right-6 lg:-right-9 top-[40%] sm:top-1/2 -translate-y-1/2 z-[70] w-8 h-8 sm:w-10 sm:h-10 bg-white/90 sm:bg-white/80 shadow-md backdrop-blur-sm rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+            className="absolute right-2 sm:-right-6 lg:-right-9 top-1/2 -translate-y-1/2 z-[70] w-9 h-9 sm:w-10 sm:h-10 bg-white/90 sm:bg-white/80 shadow-md backdrop-blur-sm rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 hover:scale-110 active:scale-95 transition-all cursor-pointer"
           >
-            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
           </button>
 
           {/* Mobile indicator dots */}
