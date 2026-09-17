@@ -80,21 +80,13 @@ export const Hero = () => {
           {/* Left Column: Mission, Headline & Conversion Controls */}
           <div className="lg:col-span-5 space-y-5 text-left">
             {/* Certification & Trust Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-800 text-[11px] sm:text-xs font-semibold shadow-sm"
-            >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-800 text-[11px] sm:text-xs font-semibold shadow-sm">
               <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
               <span>ISO 9001 & 27001 Certified | Licensed & Bonded Armed Corps</span>
-            </motion.div>
+            </div>
 
             {/* Main Command Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+            <h1
               className="text-2xl sm:text-3xl lg:text-[2.65rem] font-black tracking-tight leading-tight hero-main-title text-[#0F172A]"
               style={{ color: '#0F172A' }}
             >
@@ -104,26 +96,18 @@ export const Hero = () => {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 font-black block">
                 You Can Trust
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Concise Mission Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+            <p
               className="text-xs sm:text-sm text-[#334155] max-w-lg leading-relaxed font-semibold"
               style={{ color: '#334155' }}
             >
               Protecting corporate headquarters, public facilities, industrial complexes, and VIP principals with tactical discipline, vetted personnel, and 24/7 central dispatch.
-            </motion.p>
+            </p>
 
             {/* Primary Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-2.5 pt-1"
-            >
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <Link href="/request-quote">
                 <Button size="sm" variant="primary" className="shadow-md text-xs px-4 py-2 font-bold">
                   Get a Free Quote
@@ -139,15 +123,10 @@ export const Hero = () => {
                   Contact Dispatch
                 </Button>
               </Link>
-            </motion.div>
+            </div>
 
             {/* Live Operational Metrics in Compact Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5"
-            >
+            <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               <div className="bg-white rounded-xl p-3 border border-slate-200 text-center shadow-sm">
                 <span className="block text-lg sm:text-xl font-extrabold text-amber-600">24/7/365</span>
                 <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Command Dispatch</span>
@@ -164,16 +143,11 @@ export const Hero = () => {
                 <span className="block text-lg sm:text-xl font-extrabold text-amber-600">20+ Yrs</span>
                 <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Experience</span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Right Column: React Bits Showcase - balanced alignment with left column */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 w-full flex flex-col justify-center items-center"
-          >
+          {/* Right Column: React Bits Showcase */}
+          <div className="lg:col-span-7 w-full flex flex-col justify-center items-center">
             {/* ScrollStack View Container - wide landscape rectangular showcase */}
             <div className="relative w-full h-[450px] sm:h-[465px] flex items-start justify-center bg-transparent px-0 sm:px-1">
               <ScrollStack
@@ -238,7 +212,7 @@ export const Hero = () => {
                 ))}
               </ScrollStack>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

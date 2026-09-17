@@ -1,5 +1,5 @@
 import api from './api';
-import { MOCK_SERVICES, MOCK_FAQS, MOCK_TESTIMONIALS } from '../utils/mockData';
+import { MOCK_SERVICES, MOCK_FAQS, MOCK_TESTIMONIALS, MOCK_PROJECTS, MOCK_CLIENTS } from '../utils/mockData';
 
 export const publicService = {
   getServices: async () => {
@@ -59,18 +59,24 @@ export const publicService = {
   getClients: async () => {
     try {
       const res = await api.get('/public/clients');
-      return res.data.data;
+      if (res.data?.data && res.data.data.length > 0) {
+        return res.data.data;
+      }
+      return MOCK_CLIENTS;
     } catch {
-      return [];
+      return MOCK_CLIENTS;
     }
   },
 
   getProjects: async () => {
     try {
       const res = await api.get('/public/projects');
-      return res.data.data;
+      if (res.data?.data && res.data.data.length > 0) {
+        return res.data.data;
+      }
+      return MOCK_PROJECTS;
     } catch {
-      return [];
+      return MOCK_PROJECTS;
     }
   },
 

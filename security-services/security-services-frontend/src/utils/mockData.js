@@ -138,3 +138,47 @@ export const MOCK_TESTIMONIALS = [
     avatarUrl: '/images/avatar_logistics_manager.jpg'
   }
 ];
+
+export const MOCK_PROJECTS = [
+  {
+    id: 1,
+    title: 'Perimeter Hardening & Access Control Overhaul',
+    slug: 'perimeter-hardening-financial-center',
+    clientName: 'Manhattan Financial Center',
+    clientType: 'Commercial Banking',
+    location: 'Wall Street, New York, NY',
+    featuredImageUrl: '/images/service_banking_finance.jpg',
+    securityRequirement: 'High-risk commercial tower requiring 24/7 armed turnstile enforcement, visitor biometric verification, and sub-second panic dispatch integration.',
+    results: '100% compliance on visitor vetting, zero unauthorized floor penetrations across 18 months, and 60% reduction in security false alarms.'
+  },
+  {
+    id: 2,
+    title: 'AI Smart Video Surveillance & Rapid Mobile Patrol',
+    slug: 'ai-surveillance-logistics-hub',
+    clientName: 'Apex Distribution Logistics Park',
+    clientType: 'Supply Chain & Freight',
+    location: 'Elizabeth, NJ Intermodal Terminal',
+    featuredImageUrl: '/images/service_warehouse_logistics.jpg',
+    securityRequirement: 'Sprawling 35-acre cargo distribution yard with multiple blind spots, perimeter fence breaches, and overnight cargo theft attempts.',
+    results: 'Zero cargo loss incidents since deployment, 99.4% prompt GPS checkpoint wanding adherence, and full automated drone perimeter verification.'
+  },
+  {
+    id: 3,
+    title: 'Executive Protection & Secure Motorcade Detail',
+    slug: 'executive-motorcade-global-summit',
+    clientName: 'Global Technology Leadership Council',
+    clientType: 'Executive Protection',
+    location: 'Washington D.C. & New York City',
+    featuredImageUrl: '/images/hero_executive_protection.jpg',
+    securityRequirement: 'Discreet, armed close protection and advance route reconnaissance for 14 multinational CEOs attending bilateral economic summits.',
+    results: 'Impeccable zero-incident execution, flawless motorcade logistics across high-traffic urban corridors, and round-the-clock medical response readiness.'
+  }
+];
+
+export const MOCK_CLIENTS = [
+  { id: 1, name: 'Apex Commercial Real Estate', logoUrl: '/images/hero_command_center.jpg', industry: 'Commercial Real Estate' },
+  { id: 2, name: 'Horizon Technologies', logoUrl: '/images/hero_executive_protection.jpg', industry: 'Defense & Technology' },
+  { id: 3, name: 'Metro Distribution Networks', logoUrl: '/images/service_warehouse_logistics.jpg', industry: 'Logistics & Supply Chain' },
+  { id: 4, name: 'Sterling Financial Group', logoUrl: '/images/service_banking_finance.jpg', industry: 'Banking & Asset Management' }
+];
+
