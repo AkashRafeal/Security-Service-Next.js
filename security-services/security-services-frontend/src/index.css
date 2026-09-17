@@ -7,6 +7,8 @@
     scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   body {
     background-color: #F8FAFC;
@@ -14,6 +16,8 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   /* Hide scrollbars completely across the entire site for all elements */
   *, *::before, *::after {

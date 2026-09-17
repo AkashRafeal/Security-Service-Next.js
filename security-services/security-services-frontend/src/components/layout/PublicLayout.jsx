@@ -12,7 +12,7 @@ export const PublicLayout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-800 selection:bg-gold-500 selection:text-white">
       <Navbar />
-      <main className="flex-grow pt-[104px] sm:pt-[106px]">
+      <main className="flex-grow pt-[58px] sm:pt-[64px] lg:pt-[94px]">
         {children}
       </main>
       {!hideFooter && <Footer />}

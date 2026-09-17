@@ -142,8 +142,8 @@ const ScrollStack = ({
         onTouchEnd={handleTouchEnd}
       >
         {/* Centered Deck Frame - extended wide panoramic rectangular showcase */}
-        <div className="relative w-full max-w-[740px] sm:max-w-[820px] lg:max-w-[900px] xl:max-w-[980px] h-[440px] sm:h-[455px]">
-          {/* Deck Controls: Fully transparent navigation buttons */}
+        <div className="relative w-full max-w-[740px] sm:max-w-[820px] lg:max-w-[900px] xl:max-w-[980px] h-[375px] sm:h-[440px] lg:h-[455px]">
+          {/* Deck Controls: Safe positioning on mobile with frosted button */}
           <button
             type="button"
             onClick={(e) => {
@@ -153,9 +153,9 @@ const ScrollStack = ({
             }}
             aria-label="Previous card"
             title="Previous Card"
-            className="absolute -left-5 sm:-left-7 lg:-left-9 top-1/2 -translate-y-1/2 z-[70] w-9 h-9 sm:w-10 sm:h-10 bg-transparent text-slate-700 hover:text-amber-600 flex items-center justify-center hover:scale-110 active:scale-90 transition-all cursor-pointer"
+            className="absolute left-2 sm:-left-7 lg:-left-9 top-1/2 -translate-y-1/2 z-[70] w-8 h-8 sm:w-10 sm:h-10 bg-white/90 sm:bg-transparent shadow-md sm:shadow-none rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 sm:border-transparent hover:scale-110 active:scale-95 transition-all cursor-pointer"
           >
-            <ChevronLeft className="w-6 h-6 text-slate-700 hover:text-amber-600 transition-colors" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
           </button>
 
           <button
@@ -167,10 +167,20 @@ const ScrollStack = ({
             }}
             aria-label="Next card"
             title="Next Card"
-            className="absolute -right-5 sm:-right-7 lg:-right-9 top-1/2 -translate-y-1/2 z-[70] w-9 h-9 sm:w-10 sm:h-10 bg-transparent text-slate-700 hover:text-amber-600 flex items-center justify-center hover:scale-110 active:scale-90 transition-all cursor-pointer"
+            className="absolute right-2 sm:-right-7 lg:-right-9 top-1/2 -translate-y-1/2 z-[70] w-8 h-8 sm:w-10 sm:h-10 bg-white/90 sm:bg-transparent shadow-md sm:shadow-none rounded-full flex items-center justify-center text-slate-800 hover:text-amber-600 border border-slate-200/80 sm:border-transparent hover:scale-110 active:scale-95 transition-all cursor-pointer"
           >
-            <ChevronRight className="w-6 h-6 text-slate-700 hover:text-amber-600 transition-colors" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-slate-800 hover:text-amber-600 transition-colors" />
           </button>
+
+          {/* Mobile indicator dots */}
+          <div className="absolute -bottom-5 left-0 right-0 z-50 flex items-center justify-center gap-1.5 sm:hidden">
+            {childrenArray.map((_, dotIdx) => (
+              <span
+                key={dotIdx}
+                className={`h-1.5 rounded-full transition-all ${dotIdx === activeIndex ? 'w-4 bg-amber-500' : 'w-1.5 bg-slate-300'}`}
+              />
+            ))}
+          </div>
 
           {childrenArray.map((child, i) => {
             const isExiting = exitingCard === i;

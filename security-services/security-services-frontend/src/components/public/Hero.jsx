@@ -107,49 +107,49 @@ export const Hero = () => {
             </p>
 
             {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
-              <Link href="/request-quote">
-                <Button size="sm" variant="primary" className="shadow-md text-xs px-4 py-2 font-bold">
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <Link href="/request-quote" className="flex-1 min-w-[130px] sm:flex-initial">
+                <Button size="sm" variant="primary" className="w-full justify-center shadow-md text-xs px-3.5 py-2 font-bold">
                   Get a Free Quote
                 </Button>
               </Link>
-              <Link href="/services">
-                <Button size="sm" variant="secondary" icon={Shield} className="btn-secondary text-xs px-4 py-2 font-bold shadow-sm">
+              <Link href="/services" className="flex-1 min-w-[120px] sm:flex-initial">
+                <Button size="sm" variant="secondary" icon={Shield} className="w-full justify-center btn-secondary text-xs px-3.5 py-2 font-bold shadow-xs">
                   Our Services
                 </Button>
               </Link>
-              <Link href="/contact">
-                <Button size="sm" variant="outline" icon={PhoneCall} className="text-xs px-4 py-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="sm" variant="outline" icon={PhoneCall} className="w-full justify-center text-xs px-3.5 py-2 border-amber-600 text-amber-700 hover:bg-amber-50 font-bold">
                   Contact Dispatch
                 </Button>
               </Link>
             </div>
 
             {/* Live Operational Metrics in Compact Grid */}
-            <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <div className="bg-white rounded-xl p-3 border border-slate-200 text-center shadow-sm">
-                <span className="block text-lg sm:text-xl font-extrabold text-amber-600">24/7/365</span>
-                <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Command Dispatch</span>
+            <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 text-center shadow-xs">
+                <span className="block text-base sm:text-xl font-extrabold text-amber-600">24/7/365</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#334155] mt-0.5 block leading-tight" style={{ color: '#334155' }}>Command Dispatch</span>
               </div>
-              <div className="bg-white rounded-xl p-3 border border-slate-200 text-center shadow-sm">
-                <span className="block text-lg sm:text-xl font-extrabold text-amber-600">99.8%</span>
-                <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Client Retention</span>
+              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 text-center shadow-xs">
+                <span className="block text-base sm:text-xl font-extrabold text-amber-600">99.8%</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#334155] mt-0.5 block leading-tight" style={{ color: '#334155' }}>Client Retention</span>
               </div>
-              <div className="bg-white rounded-xl p-3 border border-slate-200 text-center shadow-sm">
-                <span className="block text-lg sm:text-xl font-extrabold text-amber-600">1,500+</span>
-                <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Vetted Guards</span>
+              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 text-center shadow-xs">
+                <span className="block text-base sm:text-xl font-extrabold text-amber-600">1,500+</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#334155] mt-0.5 block leading-tight" style={{ color: '#334155' }}>Vetted Guards</span>
               </div>
-              <div className="bg-white rounded-xl p-3 border border-slate-200 text-center shadow-sm">
-                <span className="block text-lg sm:text-xl font-extrabold text-amber-600">20+ Yrs</span>
-                <span className="text-[11px] font-bold text-[#334155] mt-0.5 block" style={{ color: '#334155' }}>Experience</span>
+              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 text-center shadow-xs">
+                <span className="block text-base sm:text-xl font-extrabold text-amber-600">20+ Yrs</span>
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#334155] mt-0.5 block leading-tight" style={{ color: '#334155' }}>Experience</span>
               </div>
             </div>
           </div>
 
           {/* Right Column: React Bits Showcase */}
           <div className="lg:col-span-7 w-full flex flex-col justify-center items-center">
-            {/* ScrollStack View Container - wide landscape rectangular showcase */}
-            <div className="relative w-full h-[450px] sm:h-[465px] flex items-start justify-center bg-transparent px-0 sm:px-1">
+            {/* ScrollStack View Container - responsive rectangular showcase */}
+            <div className="relative w-full h-[395px] sm:h-[450px] lg:h-[465px] flex items-start justify-center bg-transparent px-0 sm:px-1">
               <ScrollStack
                 autoPlay={true}
                 autoPlayInterval={5000}
@@ -159,37 +159,37 @@ export const Hero = () => {
                 {TACTICAL_DIVISIONS.map((item) => (
                   <ScrollStackItem
                     key={item.id}
-                    className={`relative w-full h-[405px] sm:h-[420px] overflow-hidden rounded-2xl border ${item.borderClass} bg-white shadow-xl p-3.5 sm:p-4 flex flex-col justify-end group`}
+                    className={`relative w-full h-[355px] sm:h-[405px] lg:h-[420px] overflow-hidden rounded-2xl border ${item.borderClass} bg-white shadow-xl p-2.5 sm:p-4 flex flex-col justify-end group`}
                   >
-                    {/* Background Photo - 100% full clarity, zero white wash */}
+                    {/* Background Photo */}
                     <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                       style={{ backgroundImage: `url(${item.image})` }}
                     />
 
                     {/* Floating Bottom Card - Translucent frosted glass effect */}
-                    <div className="relative z-10 w-full bg-white/75 backdrop-blur-md rounded-xl p-3 sm:p-3.5 border border-white/60 shadow-lg">
-                      <div className="space-y-0.5 pb-2">
+                    <div className="relative z-10 w-full bg-white/85 sm:bg-white/75 backdrop-blur-md rounded-xl p-2.5 sm:p-3.5 border border-white/60 shadow-lg">
+                      <div className="space-y-0.5 pb-1 sm:pb-2">
                         <h3
-                          className="text-sm sm:text-base font-bold text-[#0F172A] transition-colors tracking-tight"
+                          className="text-xs sm:text-base font-bold text-[#0F172A] transition-colors tracking-tight truncate"
                           style={{ color: '#0F172A' }}
                         >
                           {item.title}
                         </h3>
                         <p
-                          className="text-[11.5px] sm:text-xs text-[#334155] leading-relaxed max-w-lg font-medium line-clamp-2"
+                          className="text-[11px] sm:text-xs text-[#334155] leading-relaxed max-w-lg font-medium line-clamp-2"
                           style={{ color: '#334155' }}
                         >
                           {item.desc}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 pt-1.5">
-                        <div className="flex flex-wrap items-center gap-1">
+                      <div className="flex items-center justify-between gap-1.5 pt-1">
+                        <div className="flex flex-wrap items-center gap-1 min-w-0">
                           {item.tags.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-2 py-0.5 rounded-md text-[10px] sm:text-[10.5px] font-semibold whitespace-nowrap border border-slate-200/70 bg-white/65 text-[#334155]"
+                              className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[9.5px] sm:text-[10.5px] font-semibold whitespace-nowrap border border-slate-200/70 bg-white/75 text-[#334155] ${tIdx > 1 ? 'hidden min-[420px]:inline-block' : 'inline-block'}`}
                             >
                               {tag}
                             </span>
@@ -200,10 +200,10 @@ export const Hero = () => {
                         <div className="flex items-center gap-1 shrink-0 ml-auto">
                           <Link
                             href={item.link}
-                            className={`inline-flex items-center gap-1.5 text-xs font-bold transition-colors px-2.5 py-1 rounded-lg border shrink-0 whitespace-nowrap shadow-sm ${item.accentClass || 'text-amber-700 bg-amber-50 border-amber-300'}`}
+                            className={`inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold transition-colors px-2.5 py-1 rounded-lg border shrink-0 whitespace-nowrap shadow-xs ${item.accentClass || 'text-amber-700 bg-amber-50 border-amber-300'}`}
                           >
                             <span>Explore</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
+                            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                           </Link>
                         </div>
                       </div>
